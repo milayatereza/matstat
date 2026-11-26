@@ -1,57 +1,72 @@
-\documentclass[a4paper,landscape,11pt]{extarticle}
-\usepackage{fontspec}\setmainfont{DejaVu Serif}[Scale=0.88]
+\documentclass[a4paper,landscape,10pt]{extarticle}
+\usepackage{fontspec}\setmainfont{DejaVu Serif}[Scale=0.9]
 \usepackage{polyglossia}\setmainlanguage{russian}
 \usepackage{amsmath,amssymb,array,booktabs,geometry}
-\geometry{left=1cm,right=1cm,top=0.9cm,bottom=0.8cm}
-\pagestyle{empty}\setlength{\parindent}{0pt}
+\geometry{left=0.9cm,right=0.9cm,top=0.7cm,bottom=0.6cm}
+\pagestyle{empty}\setlength{\parindent}{0pt}\setlength{\tabcolsep}{3.5pt}
 \newcommand{\kr}{\text{кр}}\newcommand{\nab}{\text{набл}}
+\newcommand{\bl}{$\bullet$\,}
 \newcolumntype{P}[1]{>{\raggedright\arraybackslash}p{#1}}
 \begin{document}
-\begin{center}{\large\bfseries Сводная таблица критериев проверки гипотез}\end{center}
-\vspace{-4pt}
-\renewcommand{\arraystretch}{1.5}
-\noindent\begin{tabular}{|P{2.9cm}|P{6.2cm}|P{2.4cm}|P{6.3cm}|P{6.2cm}|}
+\begin{center}{\normalsize\bfseries Сводная таблица критериев проверки гипотез (по лекциям 6, 6.1, 7.1, 7.2)}\end{center}
+\vspace{-6pt}
+\renewcommand{\arraystretch}{1.12}\footnotesize
+\noindent\begin{tabular}{|P{2.3cm}|P{4.6cm}|P{2.2cm}|P{7.1cm}|P{9.2cm}|}
 \hline
-\textbf{Гипотеза $H_0$, условие} & \textbf{Наблюдаемое значение} & \textbf{Степени свободы $k$} & \textbf{Критическая точка (по $H_1$)} & \textbf{Отвергаем $H_0$, если} \\\hline
-$D(X)=\sigma_0^2$\newline одна выборка
-& $\displaystyle \chi^2_\nab=\frac{(n-1)s^2}{\sigma_0^2}$
-& $k=n-1$
-& $>$: $\chi^2_\kr(\alpha;k)$\newline $<$: $\chi^2_\kr(1-\alpha;k)$\newline $\ne$: $\chi^2(1-\frac\alpha2;k)$ и $\chi^2(\frac\alpha2;k)$
-& $>$: $\chi^2_\nab>\chi^2_\kr$\newline $<$: $\chi^2_\nab<\chi^2_\kr$\newline $\ne$: вне отрезка между точками \\\hline
-$D(X)=D(Y)$\newline две выборки
-& $\displaystyle F_\nab=\frac{s^2_{\text{больш}}}{s^2_{\text{меньш}}}$
-& $k_1=n_{\text{б}}-1$ (у большей), $k_2=n_{\text{м}}-1$
-& $>$: $F_\kr(\alpha;k_1,k_2)$\newline $\ne$: $F_\kr(\frac\alpha2;k_1,k_2)$
-& $F_\nab>F_\kr$ \\\hline
-$D(X_1)=\dots=D(X_l)$\newline $l>2$ выборок
-& $\displaystyle B_\nab=\frac{V}{C}$,\ \ $k_i=n_i-1$,\ $k=\sum k_i$,\newline $\bar s^2=\dfrac{\sum k_is_i^2}{k}$,\ $V=2{,}303\,(k\lg\bar s^2-\sum k_i\lg s_i^2)$,\newline $C=1+\dfrac{1}{3(l-1)}\Bigl(\sum\dfrac1{k_i}-\dfrac1k\Bigr)$
-& $l-1$
-& $\chi^2_\kr(\alpha;\,l-1)$
-& $B_\nab>\chi^2_\kr$ \\\hline
-$M(X)=a_0$\newline $D(X)$ \textbf{известна}\newline (критерий $Z$)
-& $\displaystyle Z_\nab=\frac{(\bar x-a_0)\sqrt n}{\sigma}$,\ \ $\sigma=\sqrt{D(X)}$
-& ---
-& $\ne$: $\Phi(z_\kr)=\dfrac{1-\alpha}{2}$\newline $>$ или $<$: $\Phi(z_\kr)=\dfrac{1-2\alpha}{2}$
-& $\ne$: $|Z_\nab|>z_\kr$\newline $>$: $Z_\nab>z_\kr$\newline $<$: $Z_\nab<-z_\kr$ \\\hline
-$M(X)=a_0$\newline $D(X)$ \textbf{неизвестна}\newline (критерий $t$)
-& $\displaystyle T_\nab=\frac{(\bar x-a_0)\sqrt n}{s}$
-& $k=n-1$
-& $\ne$: $t_\kr(\alpha;k)$ (двусторонняя)\newline $>$ или $<$: $t_\kr(2\alpha;k)$ (двусторонняя)
-& $\ne$: $|T_\nab|>t_\kr$\newline $>$: $T_\nab>t_\kr$\newline $<$: $T_\nab<-t_\kr$ \\\hline
-$M(X)=M(Y)$\newline $D(X),D(Y)$ \textbf{известны}\newline (критерий $Z$)
-& $\displaystyle Z_\nab=\frac{\bar x-\bar y}{\sqrt{\dfrac{D(X)}{n_1}+\dfrac{D(Y)}{n_2}}}$
-& ---
-& как в строке для $Z$ (одна выборка)
-& как в строке для $Z$ (одна выборка) \\\hline
-$M(X)=M(Y)$\newline $D$ \textbf{неизвестны}\newline (критерий $t$)
-& $\displaystyle T_\nab=\frac{\bar x-\bar y}{\sqrt{(n_1-1)s_X^2+(n_2-1)s_Y^2}}\sqrt{\frac{n_1n_2(n_1+n_2-2)}{n_1+n_2}}$
-& $k=n_1+n_2-2$
-& как в строке для $t$ (одна выборка)
-& как в строке для $t$ (одна выборка) \\\hline
+\textbf{Гипотеза $H_0$} & \textbf{Условия} & \textbf{Критерий} & \textbf{Наблюдаемое значение} & \textbf{Критическая точка и правило} \\\hline
+$D(X)=D(Y)$
+&\newline\bl 2 независимые выборки\newline\bl норм. ген. сов-ти\newline\bl сравнение двух дисперсий
+& Фишера ($F$)
+& $F_\nab=\dfrac{s^2_{\text{больш}}}{s^2_{\text{меньш}}}\ge1$ ($s^2$ --- исправленные)\newline $k_1=n_{\text{б}}-1$ (у большей), $k_2=n_{\text{м}}-1$
+& $H_1$: $D(X)>D(Y)$ $\Rightarrow$ $F_\kr(\alpha;k_1,k_2)$; \ $H_1$: $\ne$ $\Rightarrow$ $F_\kr(\frac\alpha2;k_1,k_2)$.\newline $F_\nab>F_\kr$ $\Rightarrow$ $H_0$ отвергается \\\hline
+$D(X_1)=\dots=D(X_l)$
+&\newline\bl $l>2$ независимых выборок\newline\bl норм. ген. сов-ти\newline\bl сравнение нескольких дисперсий
+& Бартлетта
+& $B_\nab=\dfrac VC$, $k_i=n_i-1$, $k=\sum k_i$, $\bar s^2=\dfrac{\sum k_is_i^2}{k}$,\newline $V=2{,}303\bigl(k\lg\bar s^2-\sum k_i\lg s_i^2\bigr)$, $C=1+\dfrac{1}{3(l-1)}\Bigl(\sum\dfrac1{k_i}-\dfrac1k\Bigr)$
+& $\chi^2_\kr(\alpha;\,l-1)$.\newline $B_\nab>\chi^2_\kr$ $\Rightarrow$ $H_0$ отвергается; иначе принимается (общая дисперсия $\bar s^2$) \\\hline
+$M(X)=M(Y)$
+&\newline\bl 2 независимые выборки\newline\bl норм. ген. сов-ти\newline\bl ген. дисперсии \textbf{неизвестны}\newline\bl сравнение двух средних
+& Стьюдента для 2 выборок
+& $T_\nab=\dfrac{\bar x-\bar y}{\sqrt{(n_1-1)s_X^2+(n_2-1)s_Y^2}}\sqrt{\dfrac{n_1n_2(n_1+n_2-2)}{n_1+n_2}}$\newline $k=n_1+n_2-2$
+& $T_\kr(\alpha,k)$ --- таблица \textbf{двусторонней} области (берём $\alpha$, не $\alpha/2$).\newline $|T_\nab|>T_\kr$ $\Rightarrow$ $H_0$ отвергается \\\hline
+$M(X)=M(Y)$
+&\newline\bl 2 выборки\newline\bl норм. ген. сов-ти\newline\bl ген. дисперсии $\sigma_X^2,\sigma_Y^2$ \textbf{известны}\newline\bl сравнение двух средних
+& $Z$-критерий для 2 выборок (в лекции $N$)
+& $N_\nab=\dfrac{\bar x-\bar y}{\sqrt{\dfrac{\sigma_X^2}{n_1}+\dfrac{\sigma_Y^2}{n_2}}}$
+& $\Phi(N_\kr)=\dfrac{1-\alpha}{2}$.\newline $|N_\nab|>N_\kr$ $\Rightarrow$ $H_0$ отвергается\newline (для $>,<$ --- как в строке $Z$ для 1 выборки) \\\hline
+$M(X)=\mu_0$
+&\newline\bl 1 выборка\newline\bl норм. ген. сов-ть\newline\bl ген. дисперсия $\sigma^2$ \textbf{известна}\newline\bl сравнение среднего с заданным числом
+& $Z$-критерий для 1 выборки (в лекции $U$)
+& $Z_\nab=\dfrac{(\bar x-\mu_0)\sqrt n}{\sigma}=\dfrac{\bar x-\mu_0}{\sqrt{\sigma^2/n}}$\newline ($\sigma=\sqrt{D(X)}$)
+& $H_1$: $\ne\mu_0$: $\Phi(z_\kr)=\dfrac{1-\alpha}{2}$, отвергаем при $|Z_\nab|>z_\kr$.\newline $H_1$: $>\mu_0$: $\Phi(z_\kr)=\dfrac{1-2\alpha}{2}$, отвергаем при $Z_\nab>z_\kr$.\newline $H_1$: $<\mu_0$: то же $z_\kr$, отвергаем при $Z_\nab<-z_\kr$ \\\hline
+$M(X)=\mu_0$
+&\newline\bl 1 выборка\newline\bl норм. ген. сов-ть\newline\bl ген. дисперсия \textbf{неизвестна}\newline\bl сравнение среднего с заданным числом
+& Стьюдента для 1 выборки
+& $T_\nab=\dfrac{(\bar x-\mu_0)\sqrt n}{s}$,\quad $k=n-1$
+& $\ne\mu_0$: $t_{\text{двуст}}(\alpha,k)$ (двусторонняя таблица, $\alpha$), $|T_\nab|>t_\kr$.\newline $>\mu_0$: $t_{\text{одност}}(\alpha,k)$ (= двуст. при $2\alpha$), $T_\nab>t_\kr$.\newline $<\mu_0$: $T_\nab<-t_{\text{одност}}$ \\\hline
+$D(X)=\sigma_0^2$
+&\newline\bl 1 выборка\newline\bl норм. ген. сов-ть\newline\bl сравнение дисперсии с заданным числом
+& $\chi^2$ (для дисперсии)
+& $\chi^2_\nab=\dfrac{(n-1)s^2}{\sigma_0^2}$,\quad $k=n-1$
+& $>$: $\chi^2_\kr(\alpha;k)$, отвергаем при $\chi^2_\nab>\chi^2_\kr$.\quad $<$: $\chi^2_\kr(1-\alpha;k)$, при $\chi^2_\nab<\chi^2_\kr$.\newline $\ne$: $\chi^2_{\text{лев}}(1-\frac\alpha2;k)$ и $\chi^2_{\text{прав}}(\frac\alpha2;k)$, отвергаем \textbf{вне} отрезка \\\hline
+$p=p_0$ (вероятность события)
+&\newline\bl $n$ независимых испытаний, $m$ --- число появлений события, $w=m/n$\newline\bl $np_0q_0\ge9$
+& $Z$-критерий для вероятности (в лекции $U$)
+& $U_\nab=\dfrac{\bigl(\frac mn-p_0\bigr)\sqrt n}{\sqrt{p_0q_0}}$,\quad $q_0=1-p_0$
+& Как в строке $Z$ для 1 выборки: $\ne$: $\Phi(u_\kr)=\frac{1-\alpha}{2}$, $|U_\nab|>u_\kr$; \ $>$ / $<$: $\Phi(u_\kr)=\frac{1-2\alpha}{2}$, $U_\nab>u_\kr$ / $U_\nab<-u_\kr$ \\\hline
+$X$ имеет закон распределения $F(x)$
+&\newline\bl $n>50$--$60$\newline\bl частоты $n_i\ge5$ (иначе объединить интервалы)\newline\bl параметры можно оценивать по выборке
+& Согласия $\chi^2$ Пирсона
+& $\chi^2_\nab=\sum\limits_{i=1}^{S}\dfrac{(n_i-n_i')^2}{n_i'}$,\quad $n_i'=np_i$\newline $k=S-1-m$ ($m$ --- число оцененных параметров; для нормального $m=2$)
+& $\chi^2_\kr(\alpha;k)$ (правосторонняя).\newline $\chi^2_\nab>\chi^2_\kr$ $\Rightarrow$ $H_0$ отвергается; иначе нет оснований отвергать \\\hline
+$X$ имеет закон $F(x)$ или 2 выборки однородны
+&\newline\bl $n\ge30$\newline\bl $F(x)$ известна \textbf{полностью} (вид и параметры)\newline\bl непрерывная $X$
+& Согласия Колмогорова
+& $D_n=\max|F_n^*(x)-F(x)|$, $\lambda=D_n\sqrt n$.\newline 2 выборки: $D=\max|F_1^*-F_2^*|$, $\lambda=D\sqrt{\dfrac{n_1n_2}{n_1+n_2}}$
+& По таблице $K(\lambda)$: $P(\lambda)=1-K(\lambda)$. \ $P(\lambda)\le\alpha$ $\Rightarrow$ $H_0$ отвергается; $P(\lambda)>\alpha$ $\Rightarrow$ нет оснований отвергать (то же, что $\lambda>\lambda_\kr$: $1{,}36$ при $\alpha=0{,}05$; $1{,}63$ при $\alpha=0{,}01$) \\\hline
 \end{tabular}
 
-\vspace{4pt}\small
-\textbf{Памятка.} $s^2$ --- \emph{исправленная} дисперсия: $s^2=\frac{1}{n-1}\sum(x_i-\bar x)^2$; если дана выборочная $D_{\text{в}}$, то $s^2=\frac{n}{n-1}D_{\text{в}}$. \quad
-$z_\kr$: $\Phi(z)=0{,}495\to2{,}58$ ($\alpha=0{,}01$, $\ne$); $0{,}475\to1{,}96$ ($\alpha=0{,}05$, $\ne$); $0{,}45\to1{,}645$. \quad
-Не попали в критическую область: <<нет оснований отвергнуть $H_0$>>.
+\vspace{3pt}\footnotesize
+$\bar x,\bar y$ --- выборочные средние; $s^2$ --- \emph{исправленная} дисперсия, $s^2=\frac1{n-1}\sum(x_i-\bar x)^2$ (из выборочной $D_{\text{в}}$: $s^2=\frac n{n-1}D_{\text{в}}$); $\sigma^2$ --- известная ген. дисперсия; $\mu_0$ --- проверяемое значение мат. ожидания (в лекциях $a_0$, $m_0$); $\sigma_0^2$ --- проверяемое значение дисперсии; $\alpha$ --- уровень значимости; $k$ --- число степеней свободы. \;
+$z_\kr$: $\Phi=0{,}495\to2{,}58$ ($\alpha=0{,}01$, $\ne$); $0{,}475\to1{,}96$ ($\alpha=0{,}05$, $\ne$); $0{,}45\to1{,}645$. \; Не попали в крит. область --- <<нет оснований отвергнуть $H_0$>>.
 \end{document}
