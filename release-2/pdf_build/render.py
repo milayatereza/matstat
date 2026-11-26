@@ -6,14 +6,14 @@ from reportlab.pdfbase import pdfmetrics
 from reportlab.pdfbase.ttfonts import TTFont as RTT
 from fontTools.ttLib import TTFont as FT
 
-MAIN="MarckScript-Regular.ttf"
+MAIN="/usr/share/fonts/truetype/dejavu/DejaVuSerif.ttf"
 FALL="/usr/share/fonts/truetype/dejavu/DejaVuSerif-Italic.ttf"
 pdfmetrics.registerFont(RTT("Hand",MAIN)); pdfmetrics.registerFont(RTT("Fall",FALL))
 CM=FT(MAIN).getBestCmap()
-W,H=A4; LM=18*mm; RM=12*mm; ROW=9*mm; TOP=H-16*mm; BOT=14*mm
-FS=15; INK=(0.10,0.15,0.45)
+W,H=A4; LM=20*mm; RM=16*mm; ROW=6.6*mm; TOP=H-20*mm; BOT=18*mm
+FS=11.5; INK=(0,0,0)
 
-def fnt(ch): return "Hand" if (ord(ch) in CM and ch not in "·") else "Fall"
+def fnt(ch): return "Hand" if (ord(ch) in CM) else "Fall"
 def runs(s):
     out=[]; 
     for ch in s:
@@ -59,17 +59,10 @@ class Doc:
     def __init__(s,path,title=None):
         s.c=canvas.Canvas(path,pagesize=A4); s.y=TOP; s.newpage(first=True)
     def grid(s):
-        c=s.c; c.setStrokeColorRGB(.78,.86,.95); c.setLineWidth(.4)
-        y=TOP+ROW*0.0
-        yy=TOP
-        while yy>BOT-ROW: c.line(8*mm,yy,W-8*mm,yy); yy-=ROW
-        x=8*mm
-        while x<W-8*mm: c.line(x,BOT-ROW,x,TOP+ROW*0.0+ROW*0); x+=ROW
-        c.setStrokeColorRGB(.95,.6,.6); c.setLineWidth(.8); c.line(LM-4*mm,BOT-ROW,LM-4*mm,TOP+6*mm)
-        c.setFillColorRGB(*INK); c.setStrokeColorRGB(*INK)
+        s.c.setFillColorRGB(*INK); s.c.setStrokeColorRGB(*INK)
     def newpage(s,first=False):
         if not first: s.c.showPage()
-        s.grid(); s.y=TOP-ROW*0.75
+        s.grid(); s.y=TOP
     def need(s,rows):
         if s.y-(rows-1)*ROW < BOT: s.newpage()
     def line(s,text,indent=0,fs=FS,rows=None):
@@ -88,6 +81,6 @@ class Doc:
     def gap(s,n=0.5): s.y-=ROW*n
     def head(s,text):
         s.need(2); s.line("",rows=1) if False else None
-        s.c.setLineWidth(.9); s.line(text,fs=FS+2)
-        s.c.line(LM,s.y+ROW*.78,LM+lw(text,FS+2),s.y+ROW*.78)
+        s.c.setLineWidth(.9); s.line(text,fs=FS+1.5)
+        s.c.line(LM,s.y+ROW*.72,LM+lw(text,FS+1.5),s.y+ROW*.72)
     def save(s): s.c.save()
