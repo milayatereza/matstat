@@ -1,0 +1,100 @@
+\documentclass[a4paper,landscape,9pt]{extarticle}
+\usepackage{fontspec}\setmainfont{DejaVu Serif}[Scale=0.92]\usepackage{polyglossia}\setmainlanguage{russian}
+\usepackage{amsmath,amssymb,array,booktabs,geometry,enumitem}
+\geometry{left=1.2cm,right=1.2cm,top=1.1cm,bottom=1cm}
+\pagestyle{empty}
+\setlength{\parindent}{0pt}
+\renewcommand{\arraystretch}{1.15}
+\newcolumntype{P}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcommand{\kr}{\text{крит}}
+\newcommand{\nab}{\text{набл}}
+\begin{document}
+\begin{center}
+{\large\bfseries Сводная таблица критериев проверки статистических гипотез}\\[1pt]
+{\footnotesize по материалам лекции «Задача оценки правдоподобия статистических гипотез»}
+\end{center}
+\vspace{-2pt}
+\small
+\begin{tabular}{@{}P{2.4cm}P{3.7cm}P{2.7cm}P{6.3cm}P{9.3cm}@{}}
+\toprule
+\textbf{Гипотеза $H_0$} & \textbf{Условия применения} & \textbf{Критерий} & \textbf{Наблюдаемое значение} & \textbf{Распределение и критическая точка} \\
+\midrule
+$D(X)=D(Y)$ &
+Две независимые нормальные генеральные совокупности &
+Фишера ($F$-критерий) &
+$\displaystyle F_{\nab}=\frac{s^2_{\text{б}}}{s^2_{\text{м}}}\ge 1$\newline
+($s^2_{\text{б}}$, $s^2_{\text{м}}$ --- большая и меньшая из исправленных дисперсий) &
+Распределение Фишера $F(k_1,k_2)$, $k_1=n_{\text{б}}-1$ (у большей дисперсии), $k_2=n_{\text{м}}-1$.\newline
+$H_1: D(X)>D(Y)$: $F_{\kr}(\alpha;k_1,k_2)$; \ $H_1: D(X)\ne D(Y)$: $F_{\kr}(\alpha/2;k_1,k_2)$.\newline
+$F_{\nab}>F_{\kr}$ --- $H_0$ отвергается, иначе нет оснований отвергнуть. \\
+\midrule
+$D(X_1)=\dots=D(X_l)$, $l>2$ &
+$l$ независимых нормальных выборок объёмов $n_1,\dots,n_l$ &
+Бартлетта &
+$\displaystyle B_{\nab}=\frac{V}{C}$, \ $k_i=n_i-1$, $k=\sum k_i$,\newline
+$\bar s^{2}=\frac1k\sum k_i s_i^2$, \ $V=2{,}303\bigl(k\lg\bar s^{2}-\sum k_i\lg s_i^2\bigr)$,\newline
+$\displaystyle C=1+\frac{1}{3(l-1)}\Bigl(\sum\frac1{k_i}-\frac1k\Bigr)$ &
+Распределение $\chi^2$ с $l-1$ степенями свободы; точка $\chi^2_{\kr}(\alpha;l-1)$.\newline
+$B_{\nab}>\chi^2_{\kr}$ --- $H_0$ отвергается; $B_{\nab}<\chi^2_{\kr}$ --- принимается. \\
+\midrule
+$M(X)=M(Y)$ &
+Две нормальные совокупности, $\sigma_X^2,\sigma_Y^2$ \textbf{неизвестны} (но равны) &
+Стьюдента ($t$-критерий, 2 выборки) &
+$\displaystyle T_{\nab}=\frac{\bar x-\bar y}{\sqrt{(n_1-1)s_X^2+(n_2-1)s_Y^2}}\sqrt{\frac{n_1n_2(n_1+n_2-2)}{n_1+n_2}}$ &
+Распределение Стьюдента, $k=n_1+n_2-2$.\newline
+$H_1: M(X)\ne M(Y)$: двусторонняя область, $T_{\kr}(\alpha,k)$; $|T_{\nab}|>T_{\kr}$ --- $H_0$ отвергается. \\
+\midrule
+$M(X)=M(Y)$ &
+Две нормальные совокупности, $\sigma_X^2,\sigma_Y^2$ \textbf{известны} &
+$Z$-критерий (нормальный, 2 выборки) &
+$\displaystyle Z_{\nab}=\frac{\bar x-\bar y}{\sqrt{\dfrac{\sigma_X^2}{n_1}+\dfrac{\sigma_Y^2}{n_2}}}$ &
+Нормальное $N(0;1)$. $H_1: M(X)\ne M(Y)$: $\Phi(z_{\kr})=\dfrac{1-\alpha}{2}$;\ \ $H_1: M(X)>M(Y)$: $\Phi(z_{\kr})=\dfrac{1-2\alpha}{2}$.\newline
+$|Z_{\nab}|>z_{\kr}$ --- $H_0$ отвергается. \\
+\midrule
+$M(X)=a_0$ &
+Одна нормальная совокупность, $\sigma^2$ \textbf{известна} &
+$Z$-критерий (1 выборка) &
+$\displaystyle Z_{\nab}=\frac{(\bar x-a_0)\sqrt n}{\sigma}$ &
+Нормальное $N(0;1)$. $H_1: M(X)\ne a_0$: $\Phi(z_{\kr})=\dfrac{1-\alpha}{2}$;\ \ $H_1: M(X)>a_0$: $\Phi(z_{\kr})=\dfrac{1-2\alpha}{2}$.\newline
+$|Z_{\nab}|>z_{\kr}$ --- $H_0$ отвергается. \\
+\midrule
+$M(X)=a_0$ &
+Одна нормальная совокупность, $\sigma^2$ \textbf{неизвестна} &
+Стьюдента ($t$-критерий, 1 выборка) &
+$\displaystyle T_{\nab}=\frac{(\bar x-a_0)\sqrt n}{s}$ &
+Стьюдента, $k=n-1$. $H_1: M(X)\ne a_0$: двусторонняя область, $T_{\kr}(\alpha,k)$; $|T_{\nab}|>T_{\kr}$ --- $H_0$ отвергается. \\
+\midrule
+$\sigma^2=\sigma_0^2$ &
+Одна нормальная совокупность; $s^2$ сравнивается с $\sigma_0^2$ &
+$\chi^2$ (Пирсона для дисперсии) &
+$\displaystyle \chi^2_{\nab}=\frac{(n-1)s^2}{\sigma_0^2}$ &
+Распределение $\chi^2$, $k=n-1$.\newline
+$H_1:\sigma^2>\sigma_0^2$: $\chi^2_{\kr}(\alpha;k)$, отвергаем при $\chi^2_{\nab}>\chi^2_{\kr}$.\newline
+$H_1:\sigma^2<\sigma_0^2$: $\chi^2_{\kr}(1-\alpha;k)$, отвергаем при $\chi^2_{\nab}<\chi^2_{\kr}$.\newline
+$H_1:\sigma^2\ne\sigma_0^2$: границы $\chi^2_{\text{лев}}(1-\alpha/2;k)$ и $\chi^2_{\text{прав}}(\alpha/2;k)$; отвергаем вне отрезка между ними. \\
+\bottomrule
+\end{tabular}
+
+\vspace{4pt}
+{\scriptsize\textbf{Примечания.} $s^2,s_X^2,s_Y^2$ --- исправленные выборочные дисперсии; $\bar x,\bar y$ --- выборочные средние; $n,n_1,n_2$ --- объёмы выборок; $\alpha$ --- уровень значимости; $\Phi(x)=\frac1{\sqrt{2\pi}}\int_0^x e^{-t^2/2}dt$ --- функция Лапласа. Критические точки берутся из таблиц соответствующих распределений.}
+
+\newpage
+\normalsize
+\begin{center}{\large\bfseries Сводка формул для решения задач (вне таблицы критериев)}\end{center}
+\vspace{2pt}
+\textbf{1. Выборочные характеристики}\par\smallskip
+Выборочное среднее: $\displaystyle \bar x=\frac1n\sum_{i=1}^n x_i$.\qquad
+Исправленная дисперсия: $\displaystyle s^2=\frac1{n-1}\sum_{i=1}^n (x_i-\bar x)^2=\frac{n}{n-1}\Bigl(\overline{x^2}-\bar x^{\,2}\Bigr)$.\qquad
+$s=\sqrt{s^2}$.\par\bigskip
+\textbf{2. Общий порядок проверки гипотезы}\par\smallskip
+(1) записать $H_0$ и $H_1$; (2) выбрать критерий по условиям (какие дисперсии известны, сколько выборок); (3) вычислить наблюдаемое значение по формуле из таблицы; (4) найти критическую точку по $\alpha$, виду $H_1$ и числу степеней свободы; (5) сравнить и записать вывод: если наблюдаемое значение попало в критическую область --- $H_0$ отвергается, иначе нет оснований её отвергнуть.\par\bigskip
+\textbf{3. Как выбрать критерий}\par\smallskip
+Сравнение двух дисперсий --- критерий Фишера. Сравнение $l>2$ дисперсий --- критерий Бартлетта. Сравнение дисперсии с числом $\sigma_0^2$ --- критерий $\chi^2$.
+Сравнение двух средних: дисперсии известны --- $Z$-критерий, неизвестны --- критерий Стьюдента. Сравнение среднего с числом $a_0$: $\sigma$ известна --- $Z$-критерий, неизвестна --- $t$-критерий.\par\bigskip
+\textbf{4. Какую критическую точку брать}\par\smallskip
+Односторонняя область ($H_1$ с знаком $>$ или $<$): уровень $\alpha$. Двусторонняя область ($H_1$ с знаком $\ne$): для Фишера и $\chi^2$ берут $\alpha/2$ (для $\chi^2$ --- две границы), для $Z$ используют $\Phi(z_{\kr})=\frac{1-\alpha}2$, для Стьюдента --- таблицу двусторонней критической области.\par\bigskip
+\textbf{5. Числа степеней свободы}\par\smallskip
+Фишер: $k_1=n_1-1$ (у большей дисперсии), $k_2=n_2-1$. Бартлетт: $l-1$. Стьюдент (2 выборки): $n_1+n_2-2$. Стьюдент (1 выборка) и $\chi^2$: $n-1$.\par\bigskip
+\textbf{6. Значения функции Лапласа, которые часто нужны}\par\smallskip
+$\Phi(2{,}58)=0{,}495$ (для $\alpha=0{,}01$, двусторонняя область); \ $\Phi(1{,}96)=0{,}475$ (для $\alpha=0{,}05$); \ $\Phi(1{,}645)=0{,}45$ (для $\alpha=0{,}1$).
+\end{document}
