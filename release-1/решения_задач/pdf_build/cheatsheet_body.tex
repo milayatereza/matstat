@@ -1,0 +1,161 @@
+\begin{center}
+{\Large\bfseries Шпаргалка: проверка статистических гипотез}\\[2pt]
+{\small для самостоятельной работы (лекции 6 и 6.1). Как решать: выбрать критерий \,$\to$\, посчитать \,$\to$\, найти критическую точку \,$\to$\, сравнить}
+\end{center}
+
+\section*{1. Порядок решения любой задачи (одинаковый для всех критериев)}
+\begin{enumerate}[label=\bfseries Шаг \arabic*.,leftmargin=3.6em]
+\item Записать $H_0$ (основная гипотеза, обычно «равенство») и $H_1$ (конкурирующая: $>$, $<$ или $\ne$). Знак в $H_1$ определяет \textbf{вид критической области}.
+\item Выбрать критерий по таблице п.\,2 (смотреть: что сравниваем, что известно про дисперсии).
+\item Вычислить \textbf{наблюдаемое значение} по формуле из карточки критерия.
+\item Найти \textbf{критическую точку} по $\alpha$, виду $H_1$ и числу степеней свободы $k$ (таблицы в конце).
+\item Сравнить и записать вывод. Наблюдаемое значение в критической области $\Rightarrow$ $H_0$ \textbf{отвергаем}. Иначе: «\textbf{нет оснований отвергнуть} $H_0$» (это не значит, что $H_0$ доказана).
+\end{enumerate}
+
+\section*{2. Какой критерий выбрать}
+\renewcommand{\arraystretch}{1.25}
+\noindent\begin{tabular}{@{}>{\raggedright\arraybackslash}p{7.6cm}>{\raggedright\arraybackslash}p{4.4cm}>{\raggedright\arraybackslash}p{5.3cm}@{}}
+\toprule
+\textbf{Что проверяем} & \textbf{Критерий} & \textbf{Пример из СР} \\\midrule
+Дисперсия \textbf{одной} выборки равна числу $\sigma_0^2$ & $\chi^2$ (карточка A) & задача 1 \\
+\textbf{Две} дисперсии равны ($D(X)=D(Y)$) & Фишера $F$ (B) & задача 3 \\
+\textbf{Три и больше} дисперсий равны & Бартлетта (C) & задача 7 \\
+Среднее \textbf{одной} выборки равно числу $a_0$, дисперсия $D(X)$ \textbf{известна} & $Z$, одна выборка (D) & задача 2 \\
+То же, но дисперсия \textbf{неизвестна} (есть $s$ или сами данные) & Стьюдента $t$, одна выборка (E) & задача 6 \\
+Средние \textbf{двух} выборок равны, $D(X)$ и $D(Y)$ \textbf{известны} & $Z$, две выборки (F) & задача 4 \\
+То же, но дисперсии \textbf{неизвестны} (даны $s^2$ или данные) & Стьюдента $t$, две выборки (G) & задача 5 \\
+\bottomrule
+\end{tabular}
+
+\begin{warn}\small
+\textbf{Как не ошибиться с выбором.} Слова «дисперсия (или $\sigma$) \textbf{известна}» $\Rightarrow$ критерий $Z$ (по таблице Лапласа). Если дана только выборка или «исправленная $s^2$ / $s$» $\Rightarrow$ $t$ (Стьюдент) или $\chi^2$. Если сравниваются средние двух выборок и дисперсии неизвестны, критерий Стьюдента предполагает их равенство: при сомнении сначала проверить $D(X)=D(Y)$ критерием Фишера.
+\end{warn}
+
+\begin{warn}\small
+\textbf{Типичные ловушки.}
+\textbf{(1)} В формулу $Z$ подставляется \textbf{дисперсия} $D$, под корнем уже стоит $D/n$; если дано СКО $\sigma$, возводите в квадрат. \;
+\textbf{(2)} В $\chi^2$, $F$, $t$ нужна \textbf{исправленная} $s^2$. Если дана «выборочная» $D_{\text{в}}$ (делили на $n$), то $s^2=\dfrac{n}{n-1}D_{\text{в}}$. \;
+\textbf{(3)} Если в $H_1$ стоит $\ne$ (двусторонняя область), в таблицах берём \textbf{$\alpha/2$} (для $Z$ и $t$ это уже встроено в формулы ниже). \;
+\textbf{(4)} В Фишере в числителе всегда \textbf{большая} дисперсия, поэтому $F_{\nab}\ge 1$.
+\end{warn}
+
+\newpage
+\section*{3. Карточки критериев (формулы и правила)}
+\renewcommand{\arraystretch}{1.15}
+
+\begin{card}{A. $\chi^2$ --- дисперсия одной выборки против числа $\sigma_0^2$ \hfill (задача 1)}
+\textbf{$H_0$:} $D(X)=\sigma_0^2$. \quad Генеральная совокупность нормальна, дана $s^2$ и $n$.\\
+$\displaystyle \chi^2_{\nab}=\frac{(n-1)\,s^2}{\sigma_0^2},\qquad k=n-1.$\\
+\begin{tabular}{@{}p{3.4cm}p{5.6cm}p{7.8cm}@{}}
+\textbf{$H_1$} & \textbf{критическая точка (таблица $\chi^2$)} & \textbf{отвергаем $H_0$, если} \\
+$D(X)>\sigma_0^2$ & $\chi^2_\kr(\alpha;k)$ & $\chi^2_{\nab}>\chi^2_\kr$ \\
+$D(X)<\sigma_0^2$ & $\chi^2_\kr(1-\alpha;k)$ & $\chi^2_{\nab}<\chi^2_\kr$ \\
+$D(X)\ne\sigma_0^2$ & слева $\chi^2(1-\alpha/2;k)$, справа $\chi^2(\alpha/2;k)$ & $\chi^2_{\nab}$ \textbf{вне} отрезка между ними \\
+\end{tabular}\\
+\emph{Пример:} $n=15,\ s^2=21{,}9,\ \sigma_0^2=20$: $\chi^2_{\nab}=14\cdot21{,}9/20=15{,}33<29{,}14$ (при $\alpha=0{,}01$, $k=14$) $\Rightarrow$ нет оснований отвергнуть.
+\end{card}
+
+\begin{card}{B. Фишера $F$ --- равенство двух дисперсий \hfill (задача 3)}
+\textbf{$H_0$:} $D(X)=D(Y)$. \quad Две независимые нормальные совокупности, даны $s_X^2,\ s_Y^2$, $n_1,\ n_2$.\\
+$\displaystyle F_{\nab}=\frac{s^2_{\text{больш}}}{s^2_{\text{меньш}}}\ \ge 1,\qquad k_1=n_{\text{больш}}-1\ \text{(у большей дисперсии)},\quad k_2=n_{\text{меньш}}-1.$\\
+$H_1:\ D(X)>D(Y)$: берём $F_\kr(\alpha;k_1,k_2)$. \quad $H_1:\ D(X)\ne D(Y)$: берём $F_\kr(\alpha/2;k_1,k_2)$.\\
+Отвергаем $H_0$, если $F_{\nab}>F_\kr$. (Если при $H_1:D(X)>D(Y)$ оказалось $s_X^2<s_Y^2$, то отвергать нечего.)\\
+\emph{Пример:} $s_X^2=25{,}31\ (n_1=12),\ s_Y^2=10{,}23\ (n_2=18)$: $F_{\nab}=2{,}47$, $k_1=11,\ k_2=17$, $F_\kr(0{,}05;11,17)=2{,}41$; $2{,}47>2{,}41\Rightarrow$ отвергаем.
+\end{card}
+
+\begin{card}{C. Бартлетта --- равенство $l>2$ дисперсий \hfill (задача 7)}
+\textbf{$H_0$:} $D(X_1)=\dots=D(X_l)$. \quad Даны $n_i$ и $s_i^2$ ($i=1..l$).\\
+$k_i=n_i-1,\quad k=\sum k_i,\quad \displaystyle\bar s^2=\frac{\sum k_i s_i^2}{k},\quad V=2{,}303\Bigl(k\lg\bar s^2-\sum k_i\lg s_i^2\Bigr),$\\
+$\displaystyle C=1+\frac{1}{3(l-1)}\Bigl(\sum\frac1{k_i}-\frac1k\Bigr),\qquad B_{\nab}=\frac{V}{C}.$\\
+Критическая точка: $\chi^2_\kr(\alpha;\,l-1)$. Отвергаем $H_0$, если $B_{\nab}>\chi^2_\kr$.\\
+\emph{Пример:} $l=4$, $B_{\nab}=5{,}74<\chi^2_\kr(0{,}01;3)=11{,}34\Rightarrow$ нет оснований отвергнуть. \emph{Удобно вести таблицу:} столбцы $n_i,\ k_i,\ s_i^2,\ k_is_i^2,\ \lg s_i^2,\ k_i\lg s_i^2,\ 1/k_i$.
+\end{card}
+
+\begin{card}{D. $Z$-критерий (Лапласа), одна выборка --- $D(X)$ известна \hfill (задача 2)}
+\textbf{$H_0$:} $M(X)=a_0$. \quad Известно $\sigma^2=D(X)$, дано $\bar x$ и $n$.\\
+$\displaystyle Z_{\nab}=\frac{(\bar x-a_0)\sqrt n}{\sigma},\qquad \sigma=\sqrt{D(X)}.$\\
+\begin{tabular}{@{}p{3.4cm}p{6.2cm}p{7.2cm}@{}}
+\textbf{$H_1$} & \textbf{критическая точка $z_\kr$ из} & \textbf{отвергаем $H_0$, если} \\
+$M(X)\ne a_0$ & $\Phi(z_\kr)=\dfrac{1-\alpha}{2}$ & $|Z_{\nab}|>z_\kr$ \\
+$M(X)>a_0$ & $\Phi(z_\kr)=\dfrac{1-2\alpha}{2}$ & $Z_{\nab}>z_\kr$ \\
+$M(X)<a_0$ & $\Phi(z_\kr)=\dfrac{1-2\alpha}{2}$ & $Z_{\nab}<-z_\kr$ \\
+\end{tabular}\\
+\emph{Пример:} $D=1{,}2,\ n=36,\ \bar x=11{,}2,\ a_0=10$: $Z_{\nab}=\dfrac{1{,}2\cdot6}{\sqrt{1{,}2}}=6{,}57>2{,}58$ ($\alpha=0{,}01$, $\ne$) $\Rightarrow$ отвергаем.
+\end{card}
+
+\begin{card}{E. Стьюдента $t$, одна выборка --- $D(X)$ неизвестна}
+\textbf{$H_0$:} $M(X)=a_0$. \quad Есть выборка (или $\bar x,\ s,\ n$).\\
+$\displaystyle T_{\nab}=\frac{(\bar x-a_0)\sqrt n}{s},\qquad k=n-1,\qquad s=\sqrt{s^2}.$\\
+$H_1:\ M(X)\ne a_0$: $t_{\text{двуст}}(\alpha;k)$, отвергаем при $|T_{\nab}|>t_\kr$. \;
+$H_1:\ M(X)>a_0$: $t_\kr=t_{\text{двуст}}(2\alpha;k)$, отвергаем при $T_{\nab}>t_\kr$. \;
+$H_1:\ M(X)<a_0$: то же $t_\kr$, отвергаем при $T_{\nab}<-t_\kr$.\\
+Если даны сами измерения: $\bar x=\frac1n\sum x_i$, $s^2=\frac{1}{n-1}\sum(x_i-\bar x)^2$ (см. п.\,4).
+\end{card}
+
+\begin{card}{F. $Z$-критерий, две выборки --- $D(X)$ и $D(Y)$ известны \hfill (задача 4)}
+\textbf{$H_0$:} $M(X)=M(Y)$. \quad Даны $\bar x,\ \bar y,\ n_1,\ n_2$ и $D(X),\ D(Y)$.\\
+$\displaystyle Z_{\nab}=\frac{\bar x-\bar y}{\sqrt{\dfrac{D(X)}{n_1}+\dfrac{D(Y)}{n_2}}}.$ \quad Критическая точка и правило \textbf{те же, что в карточке D}.\\
+\emph{Пример:} $\bar x=120,\ \bar y=115,\ D(X)=80,\ D(Y)=70,\ n_1=40,\ n_2=30$: $Z_{\nab}=\dfrac{5}{\sqrt{2+2{,}333}}=2{,}40<2{,}58$ ($\alpha=0{,}01$, $\ne$) $\Rightarrow$ нет оснований отвергнуть.
+\end{card}
+
+\begin{card}{G. Стьюдента $t$, две выборки --- дисперсии неизвестны (но равны) \hfill (задача 5)}
+\textbf{$H_0$:} $M(X)=M(Y)$. \quad Даны (или считаются по данным) $\bar x,\ \bar y,\ s_X^2,\ s_Y^2,\ n_1,\ n_2$.\\
+$\displaystyle T_{\nab}=\frac{\bar x-\bar y}{\sqrt{(n_1-1)s_X^2+(n_2-1)s_Y^2}}\cdot\sqrt{\frac{n_1n_2\,(n_1+n_2-2)}{n_1+n_2}},\qquad k=n_1+n_2-2.$\\
+Критическая точка и правило \textbf{те же, что в карточке E} (с $k=n_1+n_2-2$).
+\end{card}
+
+\newpage
+\section*{4. Вспомогательные вычисления по данным}
+\begin{itemize}
+\item \textbf{Среднее:} $\bar x=\dfrac{1}{n}\sum x_i$. \quad \textbf{Исправленная дисперсия:} $s^2=\dfrac{1}{n-1}\sum (x_i-\bar x)^2$, \quad $s=\sqrt{s^2}$.
+\item \textbf{Удобная таблица:} столбцы $x_i,\ x_i-\bar x,\ (x_i-\bar x)^2$. Проверка: $\sum(x_i-\bar x)=0$. Затем $s^2=\sum(x_i-\bar x)^2/(n-1)$.
+\item \textbf{Если даны частоты} $n_i$ значений $x_i$: $\bar x=\dfrac{\sum n_ix_i}{n}$, $\ s^2=\dfrac{\sum n_i(x_i-\bar x)^2}{n-1}$.
+\item \textbf{Из выборочной в исправленную:} $s^2=\dfrac{n}{n-1}D_{\text{в}}$.
+\item \textbf{Степени свободы:} $\chi^2$ и $t$ (одна выборка) --- $n-1$; $t$ (две выборки) --- $n_1+n_2-2$; Фишер --- $k_1=n_1-1,\ k_2=n_2-1$; Бартлетт --- $l-1$.
+\end{itemize}
+
+\section*{5. Таблицы критических точек}
+\subsection*{5.1 Функция Лапласа $\Phi(z)$: нужные значения $z_\kr$}
+\renewcommand{\arraystretch}{1.2}
+\noindent\begin{tabular}{@{}l|cccccc@{}}
+$H_1$ с $\ne$, уровень $\alpha$ & 0,10 & 0,05 & 0,02 & 0,01 & 0,002 & 0,001 \\\hline
+$\Phi(z_\kr)=(1-\alpha)/2$ & 0,450 & 0,475 & 0,490 & 0,495 & 0,499 & 0,4995 \\
+$z_\kr$ & 1,645 & 1,96 & 2,33 & 2,58 & 3,09 & 3,29 \\
+\end{tabular}\\[3pt]
+\begin{tabular}{@{}l|cccccc@{}}
+$H_1$ с $>$ или $<$, уровень $\alpha$ & 0,10 & 0,05 & 0,025 & 0,01 & 0,005 & 0,001 \\\hline
+$\Phi(z_\kr)=(1-2\alpha)/2$ & 0,400 & 0,450 & 0,475 & 0,490 & 0,495 & 0,499 \\
+$z_\kr$ & 1,28 & 1,645 & 1,96 & 2,33 & 2,58 & 3,09 \\
+\end{tabular}
+
+\subsection*{5.2 Распределение Стьюдента (двусторонняя область, уровень $\alpha$, $k$ степеней свободы)}
+Для \textbf{односторонней} области ищите столбец $2\alpha$ (например, $\alpha=0{,}05\to$ столбец 0,10).\\[2pt]
+\scriptsize\renewcommand{\arraystretch}{0.88}\setlength{\tabcolsep}{4pt}
+\begin{minipage}[t]{0.47\textwidth}\centering
+\textbf{$t_\kr(\alpha;k)$}\\[2pt]
+%%T%%
+\end{minipage}\hfill
+\begin{minipage}[t]{0.5\textwidth}\centering
+\textbf{$\chi^2_\kr(\alpha;k)$:} $P(\chi^2>\chi^2_\kr)=\alpha$\\[2pt]
+%%CHI%%
+\end{minipage}
+\normalsize
+
+\newpage
+\section*{5.3 Распределение Фишера $F_\kr(\alpha;k_1,k_2)$}
+$k_1$ --- у \textbf{большей} дисперсии, $k_2$ --- у меньшей. Для $H_1$ с $\ne$ используйте $\alpha/2$ (т.\,е. для $\alpha=0{,}05$ --- таблицу $0{,}025$; для $\alpha=0{,}01$ --- таблицу $0{,}005$). Для $k>30$ берите ближайшее табличное $k$ (строка/столбец) в сторону уменьшения.\\
+\scriptsize\renewcommand{\arraystretch}{0.86}\setlength{\tabcolsep}{2.6pt}
+\begin{center}
+\textbf{$\alpha=0{,}05$}\\[1pt]
+%%F05%%\\[5pt]
+\textbf{$\alpha=0{,}025$}\\[1pt]
+%%F025%%
+\end{center}
+\newpage
+\scriptsize\renewcommand{\arraystretch}{0.86}\setlength{\tabcolsep}{2.6pt}
+\begin{center}
+\textbf{$\alpha=0{,}01$}\\[1pt]
+%%F01%%\\[5pt]
+\textbf{$\alpha=0{,}005$}\\[1pt]
+%%F005%%
+\end{center}
