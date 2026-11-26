@@ -1,0 +1,57 @@
+\documentclass[a4paper,landscape,11pt]{extarticle}
+\usepackage{fontspec}\setmainfont{DejaVu Serif}[Scale=0.88]
+\usepackage{polyglossia}\setmainlanguage{russian}
+\usepackage{amsmath,amssymb,array,booktabs,geometry}
+\geometry{left=1cm,right=1cm,top=0.9cm,bottom=0.8cm}
+\pagestyle{empty}\setlength{\parindent}{0pt}
+\newcommand{\kr}{\text{кр}}\newcommand{\nab}{\text{набл}}
+\newcolumntype{P}[1]{>{\raggedright\arraybackslash}p{#1}}
+\begin{document}
+\begin{center}{\large\bfseries Сводная таблица критериев проверки гипотез}\end{center}
+\vspace{-4pt}
+\renewcommand{\arraystretch}{1.5}
+\noindent\begin{tabular}{|P{2.9cm}|P{6.2cm}|P{2.4cm}|P{6.3cm}|P{6.2cm}|}
+\hline
+\textbf{Гипотеза $H_0$, условие} & \textbf{Наблюдаемое значение} & \textbf{Степени свободы $k$} & \textbf{Критическая точка (по $H_1$)} & \textbf{Отвергаем $H_0$, если} \\\hline
+$D(X)=\sigma_0^2$\newline одна выборка
+& $\displaystyle \chi^2_\nab=\frac{(n-1)s^2}{\sigma_0^2}$
+& $k=n-1$
+& $>$: $\chi^2_\kr(\alpha;k)$\newline $<$: $\chi^2_\kr(1-\alpha;k)$\newline $\ne$: $\chi^2(1-\frac\alpha2;k)$ и $\chi^2(\frac\alpha2;k)$
+& $>$: $\chi^2_\nab>\chi^2_\kr$\newline $<$: $\chi^2_\nab<\chi^2_\kr$\newline $\ne$: вне отрезка между точками \\\hline
+$D(X)=D(Y)$\newline две выборки
+& $\displaystyle F_\nab=\frac{s^2_{\text{больш}}}{s^2_{\text{меньш}}}$
+& $k_1=n_{\text{б}}-1$ (у большей), $k_2=n_{\text{м}}-1$
+& $>$: $F_\kr(\alpha;k_1,k_2)$\newline $\ne$: $F_\kr(\frac\alpha2;k_1,k_2)$
+& $F_\nab>F_\kr$ \\\hline
+$D(X_1)=\dots=D(X_l)$\newline $l>2$ выборок
+& $\displaystyle B_\nab=\frac{V}{C}$,\ \ $k_i=n_i-1$,\ $k=\sum k_i$,\newline $\bar s^2=\dfrac{\sum k_is_i^2}{k}$,\ $V=2{,}303\,(k\lg\bar s^2-\sum k_i\lg s_i^2)$,\newline $C=1+\dfrac{1}{3(l-1)}\Bigl(\sum\dfrac1{k_i}-\dfrac1k\Bigr)$
+& $l-1$
+& $\chi^2_\kr(\alpha;\,l-1)$
+& $B_\nab>\chi^2_\kr$ \\\hline
+$M(X)=a_0$\newline $D(X)$ \textbf{известна}\newline (критерий $Z$)
+& $\displaystyle Z_\nab=\frac{(\bar x-a_0)\sqrt n}{\sigma}$,\ \ $\sigma=\sqrt{D(X)}$
+& ---
+& $\ne$: $\Phi(z_\kr)=\dfrac{1-\alpha}{2}$\newline $>$ или $<$: $\Phi(z_\kr)=\dfrac{1-2\alpha}{2}$
+& $\ne$: $|Z_\nab|>z_\kr$\newline $>$: $Z_\nab>z_\kr$\newline $<$: $Z_\nab<-z_\kr$ \\\hline
+$M(X)=a_0$\newline $D(X)$ \textbf{неизвестна}\newline (критерий $t$)
+& $\displaystyle T_\nab=\frac{(\bar x-a_0)\sqrt n}{s}$
+& $k=n-1$
+& $\ne$: $t_\kr(\alpha;k)$ (двусторонняя)\newline $>$ или $<$: $t_\kr(2\alpha;k)$ (двусторонняя)
+& $\ne$: $|T_\nab|>t_\kr$\newline $>$: $T_\nab>t_\kr$\newline $<$: $T_\nab<-t_\kr$ \\\hline
+$M(X)=M(Y)$\newline $D(X),D(Y)$ \textbf{известны}\newline (критерий $Z$)
+& $\displaystyle Z_\nab=\frac{\bar x-\bar y}{\sqrt{\dfrac{D(X)}{n_1}+\dfrac{D(Y)}{n_2}}}$
+& ---
+& как в строке для $Z$ (одна выборка)
+& как в строке для $Z$ (одна выборка) \\\hline
+$M(X)=M(Y)$\newline $D$ \textbf{неизвестны}\newline (критерий $t$)
+& $\displaystyle T_\nab=\frac{\bar x-\bar y}{\sqrt{(n_1-1)s_X^2+(n_2-1)s_Y^2}}\sqrt{\frac{n_1n_2(n_1+n_2-2)}{n_1+n_2}}$
+& $k=n_1+n_2-2$
+& как в строке для $t$ (одна выборка)
+& как в строке для $t$ (одна выборка) \\\hline
+\end{tabular}
+
+\vspace{4pt}\small
+\textbf{Памятка.} $s^2$ --- \emph{исправленная} дисперсия: $s^2=\frac{1}{n-1}\sum(x_i-\bar x)^2$; если дана выборочная $D_{\text{в}}$, то $s^2=\frac{n}{n-1}D_{\text{в}}$. \quad
+$z_\kr$: $\Phi(z)=0{,}495\to2{,}58$ ($\alpha=0{,}01$, $\ne$); $0{,}475\to1{,}96$ ($\alpha=0{,}05$, $\ne$); $0{,}45\to1{,}645$. \quad
+Не попали в критическую область: <<нет оснований отвергнуть $H_0$>>.
+\end{document}
