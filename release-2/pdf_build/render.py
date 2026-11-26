@@ -65,7 +65,9 @@ class Doc:
         s.grid(); s.y=TOP
     def need(s,rows):
         if s.y-(rows-1)*ROW < BOT: s.newpage()
-    def line(s,text,indent=0,fs=FS,rows=None):
+    def line(s,text,indent=0,fs=FS,rows=None,_w=True):
+        if _w and not has_frac(text) and lw(text,fs)>W-LM-RM-indent*mm:
+            return s.para(text,indent,hang=5,fs=fs)
         r=rows or (2 if has_frac(text) else 1)
         s.need(r)
         if r==2: s.y-=ROW*0.55
@@ -75,7 +77,7 @@ class Doc:
         for w in words+[None]:
             t=(cur+" "+w).strip() if w is not None else cur
             if w is None or lw(t,fs)>maxw-(hang*mm if not first else 0):
-                if cur: s.line(cur,indent+(0 if first else hang),fs); first=False
+                if cur: s.line(cur,indent+(0 if first else hang),fs,_w=False); first=False
                 cur=w or ""
             else: cur=t
     def gap(s,n=0.5): s.y-=ROW*n
